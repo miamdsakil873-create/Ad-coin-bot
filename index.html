@@ -1,780 +1,88 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
-  <head>
-    <b:include data='blog' name='all-head-content'/>
-    <title><data:blog.pageTitle/></title>
-    <meta content='width=device-width, initial-scale=1' name='viewport'/>
-    <meta content='blogger' name='generator'/>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <title>Earnova — Earn & Rewards</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-icon">E</span><div><h1>Earnova</h1><p>Earn • Rewards • Withdraw</p></div></div>
+    <div class="avatar" id="user-avatar">U</div>
+  </header>
 
-    <!-- Google Fonts -->
-    <link href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Poppins:wght@500;600;700;800&amp;display=swap' rel='stylesheet'/>
-    <!-- Font Awesome -->
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' rel='stylesheet'/>
+  <main class="container">
+    <section class="welcome">
+      <p class="muted">স্বাগতম,</p>
+      <h2 id="user-name">Earnova User 👋</h2>
+      <p class="muted">তোমার Earnova ড্যাশবোর্ডে স্বাগতম</p>
+    </section>
 
-    <b:skin><![CDATA[
-/* =====================================================
-   CineStream - Blogger Theme (Minimal + Full App)
-   ===================================================== */
-body {
-  margin: 0;
-  padding: 0;
-  background: #0a0a0a;
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-}
+    <section class="balance-card">
+      <p>তোমার ব্যালেন্স</p>
+      <h2 id="balance">৳ 0.00</h2>
+      <p class="balance-note">তোমার অ্যাকাউন্টের বর্তমান ব্যালেন্স</p>
+      <button class="button button-light" data-page="withdraw">উইথড্র করো</button>
+    </section>
 
-/* Hide default Blogger elements */
-.blog-pager, .post-footer, .post-header, .post-title, 
-.post-body img, .feed-link, #header, .tabs-outer,
-.widget-content .post-body, .blog-list-container,
-.status-msg-wrap, .widget.Header, .widget.Blog,
-.widget.Profile, .widget.Followers, .widget.BlogArchive,
-.widget.Label, .widget.LinkList, .widget.TextList {
-  display: none !important;
-}
+    <section class="stats">
+      <article class="stat-card"><span>📋</span><p>মোট টাস্ক</p><h3 id="task-count">0</h3></article>
+      <article class="stat-card"><span>👥</span><p>রেফারেল</p><h3 id="ref-count">0</h3></article>
+    </section>
 
-/* Full width container */
-#outer-wrapper, #content-wrapper, #main-wrapper, #main {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-}
-
-/* Ad sections - you can control from Layout */
-.ads-top, .ads-bottom {
-  width: 100%;
-  text-align: center;
-  padding: 10px 0;
-  background: #111;
-}
-    ]]></b:skin>
-
-    <style type='text/css'>
-      /* ========== CineStream App CSS ========== */
-      :root {
-        --netflix-red: #e50914;
-        --netflix-red-hover: #f40612;
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #141414;
-        --bg-card: #1a1a1a;
-        --text-primary: #ffffff;
-        --text-secondary: #b3b3b3;
-        --text-muted: #808080;
-        --border: #2a2a2a;
-        --shadow-glow: 0 0 30px rgba(229, 9, 20, 0.35);
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-
-      .cs-header {
-        position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-        padding: 14px 4%;
-        display: flex; align-items: center; justify-content: space-between;
-        background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%);
-        transition: background 0.4s ease;
-      }
-      .cs-header.scrolled {
-        background: rgba(10,10,10,0.97);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 2px 20px rgba(0,0,0,0.5);
-      }
-      .cs-logo {
-        display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0;
-      }
-      .cs-logo-icon {
-        width: 36px; height: 36px;
-        background: linear-gradient(135deg, var(--netflix-red), #b20710);
-        border-radius: 6px; display: flex; align-items: center; justify-content: center;
-        color: white; font-size: 16px;
-      }
-      .cs-logo-text {
-        font-family: 'Poppins', sans-serif; font-size: 1.6rem; font-weight: 800;
-        background: linear-gradient(90deg, #fff, #e50914);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      }
-      .cs-nav { display: flex; gap: 6px; list-style: none; }
-      .cs-nav button {
-        background: transparent; border: none; color: var(--text-secondary);
-        font-size: 0.92rem; font-weight: 500; padding: 8px 14px; border-radius: 6px;
-        cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif;
-      }
-      .cs-nav button:hover, .cs-nav button.active {
-        color: white; background: rgba(255,255,255,0.08);
-      }
-      .cs-header-right { display: flex; align-items: center; gap: 12px; }
-      .cs-search-box { position: relative; display: flex; align-items: center; }
-      .cs-search-box input {
-        background: rgba(20,20,20,0.9); border: 1px solid var(--border);
-        color: white; padding: 10px 16px 10px 40px; border-radius: 25px;
-        font-size: 0.9rem; width: 220px; outline: none; transition: var(--transition);
-      }
-      .cs-search-box input:focus { border-color: var(--netflix-red); width: 260px; }
-      .cs-search-box i { position: absolute; left: 14px; color: var(--text-muted); pointer-events: none; }
-      .cs-type-toggle {
-        display: flex; background: rgba(255,255,255,0.06); border-radius: 20px; padding: 3px;
-      }
-      .cs-type-toggle button {
-        background: transparent; border: none; color: var(--text-secondary);
-        padding: 6px 14px; border-radius: 18px; font-size: 0.82rem; font-weight: 600;
-        cursor: pointer; transition: var(--transition);
-      }
-      .cs-type-toggle button.active { background: var(--netflix-red); color: white; }
-
-      .cs-hero {
-        position: relative; height: 82vh; min-height: 500px; max-height: 820px;
-        display: flex; align-items: flex-end; overflow: hidden;
-      }
-      .cs-hero-bg {
-        position: absolute; inset: 0; background-size: cover; background-position: center top;
-      }
-      .cs-hero-bg::after {
-        content: ''; position: absolute; inset: 0;
-        background: linear-gradient(0deg, var(--bg-primary) 0%, rgba(10,10,10,0.25) 45%, rgba(10,10,10,0.5) 100%);
-      }
-      .cs-hero-bg::before {
-        content: ''; position: absolute; inset: 0;
-        background: linear-gradient(90deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.5) 45%, transparent 75%);
-      }
-      .cs-hero-content {
-        position: relative; z-index: 2; padding: 0 4% 70px; max-width: 640px;
-      }
-      .cs-hero-badge {
-        display: inline-flex; align-items: center; gap: 6px;
-        background: rgba(229,9,20,0.2); border: 1px solid rgba(229,9,20,0.4);
-        color: #ff6b6b; font-size: 0.72rem; font-weight: 700; padding: 5px 12px;
-        border-radius: 20px; margin-bottom: 14px; text-transform: uppercase;
-      }
-      .cs-hero-title {
-        font-family: 'Poppins', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem);
-        font-weight: 800; line-height: 1.1; margin-bottom: 14px;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      }
-      .cs-hero-meta {
-        display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;
-        font-size: 0.92rem; color: var(--text-secondary);
-      }
-      .cs-hero-meta .rating { color: #ffc107; font-weight: 600; }
-      .cs-hero-overview {
-        font-size: 1.02rem; color: var(--text-secondary); margin-bottom: 24px;
-        display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
-      }
-      .cs-hero-btns { display: flex; flex-wrap: wrap; gap: 12px; }
-      .cs-btn {
-        display: inline-flex; align-items: center; gap: 9px;
-        padding: 13px 26px; border-radius: 6px; font-weight: 600; font-size: 0.98rem;
-        cursor: pointer; border: none; transition: var(--transition); text-decoration: none;
-      }
-      .cs-btn-primary {
-        background: var(--netflix-red); color: white;
-        box-shadow: 0 4px 18px rgba(229,9,20,0.4);
-      }
-      .cs-btn-primary:hover { background: var(--netflix-red-hover); transform: translateY(-2px); }
-      .cs-btn-secondary {
-        background: rgba(109,109,110,0.7); color: white; backdrop-filter: blur(6px);
-      }
-      .cs-btn-secondary:hover { background: rgba(109,109,110,0.9); }
-
-      .cs-main { padding: 10px 4% 60px; margin-top: -30px; position: relative; z-index: 5; }
-      .cs-section-header {
-        display: flex; align-items: center; justify-content: space-between;
-        margin-bottom: 18px; flex-wrap: wrap; gap: 12px;
-      }
-      .cs-section-title {
-        font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 700;
-        display: flex; align-items: center; gap: 10px;
-      }
-      .cs-section-title i { color: var(--netflix-red); }
-      .cs-pills { display: flex; gap: 8px; flex-wrap: wrap; }
-      .cs-pills button {
-        background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-        color: var(--text-secondary); padding: 7px 16px; border-radius: 20px;
-        font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: var(--transition);
-      }
-      .cs-pills button:hover, .cs-pills button.active {
-        background: var(--netflix-red); border-color: var(--netflix-red); color: white;
-      }
-
-      .cs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-        gap: 16px; min-height: 200px;
-      }
-      .cs-card {
-        position: relative; border-radius: 10px; overflow: hidden;
-        background: var(--bg-card); cursor: pointer; transition: var(--transition);
-        box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-      }
-      .cs-card:hover {
-        transform: scale(1.05) translateY(-6px);
-        box-shadow: var(--shadow-glow); z-index: 10;
-      }
-      .cs-card img {
-        width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block;
-      }
-      .cs-card:hover img { filter: brightness(0.7); }
-      .cs-card-info {
-        position: absolute; bottom: 0; left: 0; right: 0;
-        padding: 36px 12px 12px;
-        background: linear-gradient(transparent, rgba(0,0,0,0.95));
-        opacity: 0; transform: translateY(8px); transition: var(--transition);
-      }
-      .cs-card:hover .cs-card-info { opacity: 1; transform: translateY(0); }
-      .cs-card-title {
-        font-size: 0.88rem; font-weight: 600; white-space: nowrap;
-        overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px;
-      }
-      .cs-card-meta { font-size: 0.78rem; color: #ffc107; display: flex; align-items: center; gap: 6px; }
-      .cs-card-type {
-        position: absolute; top: 8px; left: 8px;
-        background: rgba(0,0,0,0.75); color: white; font-size: 0.68rem;
-        font-weight: 600; padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
-      }
-
-      .cs-skeleton {
-        background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
-        background-size: 200% 100%; animation: cs-shimmer 1.5s infinite;
-        border-radius: 10px; aspect-ratio: 2/3;
-      }
-      @keyframes cs-shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
-
-      .cs-loader-wrap { display: flex; justify-content: center; padding: 40px; grid-column: 1/-1; }
-      .cs-loader {
-        width: 42px; height: 42px; border: 3px solid rgba(229,9,20,0.2);
-        border-top-color: var(--netflix-red); border-radius: 50%;
-        animation: cs-spin 0.8s linear infinite;
-      }
-      @keyframes cs-spin { to { transform: rotate(360deg); } }
-      .cs-end-message {
-        grid-column: 1/-1; text-align: center; padding: 30px;
-        color: var(--text-muted); font-size: 0.95rem;
-      }
-
-      .cs-modal-overlay {
-        position: fixed; inset: 0; background: rgba(0,0,0,0.88);
-        backdrop-filter: blur(8px); z-index: 2000;
-        display: flex; align-items: center; justify-content: center;
-        padding: 20px; opacity: 0; visibility: hidden; transition: all 0.3s ease;
-      }
-      .cs-modal-overlay.active { opacity: 1; visibility: visible; }
-      .cs-modal {
-        background: var(--bg-secondary); border-radius: 16px; max-width: 900px;
-        width: 100%; max-height: 92vh; overflow-y: auto; position: relative;
-        transform: scale(0.92) translateY(20px); transition: transform 0.35s ease;
-        border: 1px solid rgba(255,255,255,0.07);
-      }
-      .cs-modal-overlay.active .cs-modal { transform: scale(1) translateY(0); }
-      .cs-modal-close {
-        position: absolute; top: 14px; right: 14px; width: 38px; height: 38px;
-        background: rgba(0,0,0,0.65); border: none; border-radius: 50%;
-        color: white; font-size: 1rem; cursor: pointer; z-index: 10;
-        display: flex; align-items: center; justify-content: center; transition: var(--transition);
-      }
-      .cs-modal-close:hover { background: var(--netflix-red); transform: rotate(90deg); }
-      .cs-modal-banner {
-        height: 300px; background-size: cover; background-position: center; position: relative;
-      }
-      .cs-modal-banner::after {
-        content: ''; position: absolute; inset: 0;
-        background: linear-gradient(to top, var(--bg-secondary) 0%, transparent 65%);
-      }
-      .cs-modal-body { padding: 0 30px 30px; margin-top: -55px; position: relative; z-index: 2; }
-      .cs-modal-title { font-family: 'Poppins', sans-serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 10px; }
-      .cs-modal-meta {
-        display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 14px;
-        font-size: 0.92rem; color: var(--text-secondary);
-      }
-      .cs-modal-meta .rating { color: #ffc107; font-weight: 600; }
-      .cs-genres { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
-      .cs-genre-tag {
-        background: rgba(229,9,20,0.15); border: 1px solid rgba(229,9,20,0.3);
-        color: #ff6b6b; font-size: 0.78rem; padding: 4px 11px; border-radius: 20px;
-      }
-      .cs-modal-overview { color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; }
-      .cs-modal-actions { display: flex; flex-wrap: wrap; gap: 11px; }
-
-      .cs-footer {
-        text-align: center; padding: 35px 4%; border-top: 1px solid var(--border);
-        color: var(--text-muted); font-size: 0.88rem;
-      }
-      .cs-footer a { color: var(--netflix-red); text-decoration: none; }
-
-      .cs-toast {
-        position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
-        background: #1a1a1a; color: white; padding: 13px 22px; border-radius: 10px;
-        border-left: 4px solid var(--netflix-red); box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        z-index: 9999; display: flex; align-items: center; gap: 11px; font-size: 0.93rem;
-        max-width: 92%;
-      }
-
-      @media (max-width: 900px) {
-        .cs-nav { display: none; }
-        .cs-search-box input { width: 160px; }
-        .cs-search-box input:focus { width: 190px; }
-        .cs-hero { height: 68vh; }
-        .cs-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
-      }
-      @media (max-width: 600px) {
-        .cs-header { padding: 11px 3%; }
-        .cs-logo-text { font-size: 1.25rem; }
-        .cs-type-toggle { display: none; }
-        .cs-hero { height: 62vh; min-height: 420px; }
-        .cs-hero-content { padding-bottom: 45px; }
-        .cs-grid { grid-template-columns: repeat(auto-fill, minmax(115px, 1fr)); gap: 10px; }
-        .cs-modal-banner { height: 210px; }
-        .cs-modal-body { padding: 0 18px 22px; }
-        .cs-modal-title { font-size: 1.4rem; }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Optional Top Ad Section (you can add gadget from Layout) -->
-    <div class='ads-top'>
-      <b:section id='ads-top' class='ads-top' maxwidgets='2' showaddelement='yes'/>
-    </div>
-
-    <!-- ==================== CineStream App Start ==================== -->
-    <div id='cinestream-app'>
-
-      <header class='cs-header' id='csHeader'>
-        <a class='cs-logo' href='javascript:void(0)' onclick='csSwitchType("movie")'>
-          <div class='cs-logo-icon'><i class='fas fa-play'></i></div>
-          <span class='cs-logo-text'>CineStream</span>
-        </a>
-        <nav>
-          <ul class='cs-nav'>
-            <li><button class='cs-nav-btn active' data-type='movie'>Movies</button></li>
-            <li><button class='cs-nav-btn' data-type='tv'>TV Shows</button></li>
-            <li><button class='cs-nav-btn' data-type='trending'>Trending</button></li>
-          </ul>
-        </nav>
-        <div class='cs-header-right'>
-          <div class='cs-type-toggle' id='csTypeToggle'>
-            <button class='active' data-type='movie'>Movies</button>
-            <button data-type='tv'>TV</button>
-          </div>
-          <div class='cs-search-box'>
-            <i class='fas fa-search'></i>
-            <input id='csSearchInput' placeholder='Search movies, TV...' autocomplete='off' type='text'/>
-          </div>
-        </div>
-      </header>
-
-      <section class='cs-hero' id='csHero'>
-        <div class='cs-hero-bg' id='csHeroBg'></div>
-        <div class='cs-hero-content' id='csHeroContent'>
-          <div class='cs-loader-wrap'><div class='cs-loader'></div></div>
-        </div>
-      </section>
-
-      <main class='cs-main'>
-        <div class='cs-section-header'>
-          <h2 class='cs-section-title' id='csSectionTitle'>
-            <i class='fas fa-fire'></i> <span>Popular Movies</span>
-          </h2>
-          <div class='cs-pills' id='csPills'></div>
-        </div>
-        <div class='cs-grid' id='csGrid'></div>
-      </main>
-
-      <div class='cs-modal-overlay' id='csModalOverlay'>
-        <div class='cs-modal'>
-          <button class='cs-modal-close' id='csModalClose'><i class='fas fa-times'></i></button>
-          <div class='cs-modal-banner' id='csModalBanner'></div>
-          <div class='cs-modal-body' id='csModalBody'></div>
-        </div>
+    <section class="panel" id="page-home">
+      <div class="section-heading"><h2>শুরু করো</h2><span>Earnova</span></div>
+      <div class="menu-grid">
+        <button class="menu-item" data-page="tasks"><span>📝</span><b>টাস্ক</b><small>টাস্ক দেখো</small></button>
+        <button class="menu-item" data-page="referral"><span>🔗</span><b>রেফারেল</b><small>বন্ধুকে আমন্ত্রণ</small></button>
+        <button class="menu-item" data-page="withdraw"><span>💸</span><b>উইথড্র</b><small>টাকা তোলার অনুরোধ</small></button>
       </div>
+      <p id="status-message" class="status-message">অ্যাপ লোড হচ্ছে...</p>
+    </section>
 
-      <footer class='cs-footer'>
-        <p>Powered by <a href='https://www.themoviedb.org/' target='_blank'>TMDB API</a> • Full Movies + TV Experience</p>
-        <p style='margin-top:6px;font-size:0.8rem;'>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
-      </footer>
-    </div>
-    <!-- ==================== CineStream App End ==================== -->
+    <section class="panel hidden" id="page-tasks">
+      <div class="section-heading"><h2>টাস্ক</h2></div>
+      <div id="tasks-list"><p class="muted">টাস্ক লোড হচ্ছে...</p></div>
+    </section>
 
-    <!-- Optional Bottom Ad Section -->
-    <div class='ads-bottom'>
-      <b:section id='ads-bottom' class='ads-bottom' maxwidgets='2' showaddelement='yes'/>
-    </div>
+    <section class="panel hidden" id="page-referral">
+      <div class="section-heading"><h2>রেফারেল</h2></div>
+      <p class="muted">বন্ধুদের তোমার বটের মাধ্যমে আমন্ত্রণ জানাও। রেফারেল বোনাস এখনো সক্রিয় করা হয়নি।</p>
+      <input id="referral-link" readonly placeholder="রেফারেল লিংক এখানে দেখাবে">
+      <button class="button" id="copy-referral">লিংক কপি করো</button>
+    </section>
 
-    <!-- Main Blog section (hidden, needed for Blogger) -->
-    <div style='display:none'>
-      <b:section id='main' class='main' maxwidgets='1' showaddelement='no'>
-        <b:widget id='Blog1' locked='true' type='Blog' version='1'/>
-      </b:section>
-    </div>
+    <section class="panel hidden" id="page-withdraw">
+      <div class="section-heading"><h2>উইথড্র রিকোয়েস্ট</h2></div>
+      <p class="muted">সর্বনিম্ন অনুরোধ ৳500। অনুরোধ জমা দিলেই টাকা পাঠানো হবে না; অ্যাডমিন যাচাই করবে।</p>
+      <form id="withdraw-form">
+        <label for="withdraw-amount">টাকার পরিমাণ (৳)</label>
+        <input id="withdraw-amount" type="number" min="500" step="1" required placeholder="যেমন 500">
+        <label for="withdraw-method">পেমেন্ট মাধ্যম</label>
+        <select id="withdraw-method" required>
+          <option value="">নির্বাচন করো</option>
+          <option value="bKash">bKash</option>
+          <option value="Nagad">Nagad</option>
+          <option value="Rocket">Rocket</option>
+        </select>
+        <label for="withdraw-account">অ্যাকাউন্ট নম্বর</label>
+        <input id="withdraw-account" inputmode="numeric" required placeholder="মোবাইল নম্বর">
+        <button class="button" type="submit" id="withdraw-submit">রিকোয়েস্ট জমা দাও</button>
+        <p id="withdraw-message" class="status-message"></p>
+      </form>
+    </section>
+  </main>
 
-    <script type='text/javascript'>
-      //<![CDATA[
-      const API_KEY = '1a14db98ded75f97a6eba19cf8e7e6cf';
-      const BASE = 'https://api.themoviedb.org/3';
-      const IMG = 'https://image.tmdb.org/t/p';
+  <nav class="bottom-nav">
+    <button class="nav-item active" data-page="home"><span>⌂</span>হোম</button>
+    <button class="nav-item" data-page="tasks"><span>▤</span>টাস্ক</button>
+    <button class="nav-item" data-page="referral"><span>♧</span>রেফারেল</button>
+    <button class="nav-item" data-page="withdraw"><span>৳</span>উইথড্র</button>
+  </nav>
 
-      let mediaType = 'movie';
-      let currentCategory = 'popular';
-      let currentPage = 1;
-      let totalPages = 1;
-      let isLoading = false;
-      let isSearch = false;
-      let searchQuery = '';
-
-      const header = document.getElementById('csHeader');
-      const heroBg = document.getElementById('csHeroBg');
-      const heroContent = document.getElementById('csHeroContent');
-      const grid = document.getElementById('csGrid');
-      const sectionTitle = document.getElementById('csSectionTitle');
-      const pills = document.getElementById('csPills');
-      const searchInput = document.getElementById('csSearchInput');
-      const modalOverlay = document.getElementById('csModalOverlay');
-      const modalBanner = document.getElementById('csModalBanner');
-      const modalBody = document.getElementById('csModalBody');
-      const modalClose = document.getElementById('csModalClose');
-
-      const categories = {
-        movie: [
-          { id: 'popular', name: 'Popular', endpoint: '/movie/popular' },
-          { id: 'now_playing', name: 'Now Playing', endpoint: '/movie/now_playing' },
-          { id: 'top_rated', name: 'Top Rated', endpoint: '/movie/top_rated' },
-          { id: 'upcoming', name: 'Upcoming', endpoint: '/movie/upcoming' },
-          { id: 'hollywood', name: 'Hollywood', endpoint: '/discover/movie', params: { with_original_language: 'en', sort_by: 'popularity.desc' } }
-        ],
-        tv: [
-          { id: 'popular', name: 'Popular', endpoint: '/tv/popular' },
-          { id: 'airing_today', name: 'Airing Today', endpoint: '/tv/airing_today' },
-          { id: 'on_the_air', name: 'On The Air', endpoint: '/tv/on_the_air' },
-          { id: 'top_rated', name: 'Top Rated', endpoint: '/tv/top_rated' }
-        ],
-        trending: [
-          { id: 'all', name: 'All', endpoint: '/trending/all/week' },
-          { id: 'movie', name: 'Movies', endpoint: '/trending/movie/week' },
-          { id: 'tv', name: 'TV Shows', endpoint: '/trending/tv/week' }
-        ]
-      };
-
-      async function api(endpoint, params = {}) {
-        try {
-          const url = new URL(BASE + endpoint);
-          url.searchParams.set('api_key', API_KEY);
-          url.searchParams.set('language', 'en-US');
-          Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
-          const res = await fetch(url);
-          if (res.status === 429) {
-            showToast('API rate limit reached. Please wait a bit.');
-            return null;
-          }
-          if (!res.ok) throw new Error(res.status);
-          return await res.json();
-        } catch (e) {
-          console.error(e);
-          showToast('Failed to fetch data. Check connection.');
-          return null;
-        }
-      }
-
-      function showToast(msg) {
-        document.querySelectorAll('.cs-toast').forEach(t => t.remove());
-        const t = document.createElement('div');
-        t.className = 'cs-toast';
-        t.innerHTML = '<i class="fas fa-exclamation-circle"></i><span>' + msg + '</span>';
-        document.body.appendChild(t);
-        setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 4000);
-      }
-
-      async function loadHero() {
-        const data = await api('/trending/all/week');
-        if (!data || !data.results || !data.results.length) {
-          heroContent.innerHTML = '<div style="color:#888">Unable to load featured content</div>';
-          return;
-        }
-        const item = data.results[0];
-        const title = item.title || item.name;
-        const date = item.release_date || item.first_air_date || '';
-        const year = date ? date.split('-')[0] : 'N/A';
-        const rating = item.vote_average ? item.vote_average.toFixed(1) : 'N/A';
-        const type = item.media_type === 'tv' ? 'TV Show' : 'Movie';
-        const bg = item.backdrop_path ? IMG + '/original' + item.backdrop_path : (item.poster_path ? IMG + '/w1280' + item.poster_path : '');
-        heroBg.style.backgroundImage = bg ? "url('" + bg + "')" : '';
-        heroContent.innerHTML = '
-          <div class="cs-hero-badge"><i class="fas fa-bolt"></i> Trending ' + type + '</div>
-          <h1 class="cs-hero-title">' + esc(title) + '</h1>
-          <div class="cs-hero-meta">
-            <span class="rating"><i class="fas fa-star"></i> ' + rating + '</span>
-            <span><i class="far fa-calendar"></i> ' + year + '</span>
-            <span><i class="fas fa-tv"></i> ' + type + '</span>
-          </div>
-          <p class="cs-hero-overview">' + esc(item.overview || 'No description available.') + '</p>
-          <div class="cs-hero-btns">
-            <button class="cs-btn cs-btn-primary" onclick="csOpenDetails(\'' + (item.media_type || 'movie') + '\', ' + item.id + ')">
-              <i class="fas fa-play"></i> Watch Trailer
-            </button>
-            <button class="cs-btn cs-btn-secondary" onclick="csOpenDetails(\'' + (item.media_type || 'movie') + '\', ' + item.id + ')">
-              <i class="fas fa-info-circle"></i> More Info
-            </button>
-          </div>';
-      }
-
-      async function loadContent(reset) {
-        if (isLoading) return;
-        isLoading = true;
-
-        if (reset) {
-          currentPage = 1;
-          grid.innerHTML = Array(12).fill('<div class="cs-skeleton"></div>').join('');
-        } else {
-          const loader = document.createElement('div');
-          loader.className = 'cs-loader-wrap';
-          loader.id = 'csScrollLoader';
-          loader.innerHTML = '<div class="cs-loader"></div>';
-          grid.appendChild(loader);
-        }
-
-        let data = null;
-        if (isSearch && searchQuery) {
-          data = await api('/search/multi', { query: searchQuery, page: currentPage, include_adult: false });
-        } else {
-          const cats = categories[mediaType];
-          const cat = cats.find(c => c.id === currentCategory) || cats[0];
-          const params = Object.assign({ page: currentPage }, cat.params || {});
-          data = await api(cat.endpoint, params);
-        }
-
-        const scrollLoader = document.getElementById('csScrollLoader');
-        if (scrollLoader) scrollLoader.remove();
-        isLoading = false;
-
-        if (!data) {
-          if (reset) grid.innerHTML = '<div class="cs-end-message">Failed to load content</div>';
-          return;
-        }
-
-        totalPages = data.total_pages || 1;
-        const results = (data.results || []).filter(function(r) {
-          return r.media_type !== 'person' && (r.poster_path || r.profile_path);
-        });
-
-        if (reset) grid.innerHTML = '';
-        if (results.length === 0 && reset) {
-          grid.innerHTML = '<div class="cs-end-message"><i class="fas fa-film" style="font-size:2rem;display:block;margin-bottom:10px;opacity:0.5"></i>No results found</div>';
-          return;
-        }
-
-        results.forEach(function(item) {
-          const title = item.title || item.name || 'Unknown';
-          const poster = item.poster_path ? IMG + '/w500' + item.poster_path : 'https://via.placeholder.com/300x450/1a1a1a/555?text=No+Image';
-          const rating = item.vote_average ? item.vote_average.toFixed(1) : 'N/A';
-          const year = (item.release_date || item.first_air_date || '').split('-')[0] || '';
-          const type = item.media_type || (item.title ? 'movie' : 'tv');
-          const typeLabel = type === 'tv' ? 'TV' : 'Movie';
-
-          const card = document.createElement('div');
-          card.className = 'cs-card';
-          card.onclick = function() { csOpenDetails(type, item.id); };
-          card.innerHTML = '
-            <span class="cs-card-type">' + typeLabel + '</span>
-            <img src="' + poster + '" alt="' + esc(title) + '" loading="lazy" onerror="this.src=\'https://via.placeholder.com/300x450/1a1a1a/555?text=No+Image\'"/>
-            <div class="cs-card-info">
-              <div class="cs-card-title">' + esc(title) + '</div>
-              <div class="cs-card-meta"><i class="fas fa-star"></i> ' + rating + (year ? ' • ' + year : '') + '</div>
-            </div>';
-          grid.appendChild(card);
-        });
-
-        if (currentPage >= totalPages && !reset) {
-          const end = document.createElement('div');
-          end.className = 'cs-end-message';
-          end.textContent = '— You have reached the end —';
-          grid.appendChild(end);
-        }
-      }
-
-      function renderPills() {
-        const cats = categories[mediaType];
-        pills.innerHTML = cats.map(function(c) {
-          return '<button class="' + (c.id === currentCategory ? 'active' : '') + '" data-id="' + c.id + '">' + c.name + '</button>';
-        }).join('');
-
-        pills.querySelectorAll('button').forEach(function(btn) {
-          btn.onclick = function() {
-            currentCategory = btn.getAttribute('data-id');
-            isSearch = false;
-            searchInput.value = '';
-            updateTitle();
-            renderPills();
-            loadContent(true);
-          };
-        });
-      }
-
-      function updateTitle() {
-        if (isSearch) {
-          sectionTitle.innerHTML = '<i class="fas fa-search"></i> <span>Results for "' + esc(searchQuery) + '"</span>';
-          return;
-        }
-        const icons = { movie: 'fa-film', tv: 'fa-tv', trending: 'fa-bolt' };
-        const names = { movie: 'Movies', tv: 'TV Shows', trending: 'Trending' };
-        const cat = categories[mediaType].find(function(c) { return c.id === currentCategory; });
-        sectionTitle.innerHTML = '<i class="fas ' + icons[mediaType] + '"></i> <span>' + (cat ? cat.name : '') + ' ' + names[mediaType] + '</span>';
-      }
-
-      function csSwitchType(type) {
-        mediaType = type;
-        currentCategory = categories[type][0].id;
-        isSearch = false;
-        searchInput.value = '';
-        document.querySelectorAll('.cs-nav-btn').forEach(function(b) {
-          b.classList.toggle('active', b.getAttribute('data-type') === type);
-        });
-        document.querySelectorAll('#csTypeToggle button').forEach(function(b) {
-          b.classList.toggle('active', b.getAttribute('data-type') === type);
-        });
-        renderPills();
-        updateTitle();
-        loadContent(true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-
-      async function csOpenDetails(type, id) {
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        modalBanner.style.backgroundImage = '';
-        modalBody.innerHTML = '<div class="cs-loader-wrap" style="padding:50px"><div class="cs-loader"></div></div>';
-
-        const details = await api('/' + type + '/' + id);
-        const videos = await api('/' + type + '/' + id + '/videos');
-
-        if (!details) {
-          modalBody.innerHTML = '<div class="cs-end-message">Failed to load details</div>';
-          return;
-        }
-
-        const title = details.title || details.name;
-        const date = details.release_date || details.first_air_date || '';
-        const year = date ? date.split('-')[0] : 'N/A';
-        const runtime = details.runtime ? Math.floor(details.runtime/60) + 'h ' + (details.runtime%60) + 'm' :
-                        (details.episode_run_time && details.episode_run_time[0] ? details.episode_run_time[0] + 'm / ep' : 'N/A');
-        const rating = details.vote_average ? details.vote_average.toFixed(1) : 'N/A';
-        const genres = (details.genres || []).map(function(g) {
-          return '<span class="cs-genre-tag">' + esc(g.name) + '</span>';
-        }).join('') || '<span class="cs-genre-tag">Unknown</span>';
-        const bg = details.backdrop_path ? IMG + '/original' + details.backdrop_path : (details.poster_path ? IMG + '/w1280' + details.poster_path : '');
-        modalBanner.style.backgroundImage = bg ? "url('" + bg + "')" : 'linear-gradient(135deg,#1a1a1a,#0a0a0a)';
-
-        let trailerKey = null;
-        if (videos && videos.results) {
-          const t = videos.results.find(function(v) { return v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser'); }) ||
-                    videos.results.find(function(v) { return v.site === 'YouTube'; });
-          if (t) trailerKey = t.key;
-        }
-
-        modalBody.innerHTML = '
-          <h2 class="cs-modal-title">' + esc(title) + '</h2>
-          <div class="cs-modal-meta">
-            <span class="rating"><i class="fas fa-star"></i> ' + rating + '/10</span>
-            <span><i class="far fa-calendar-alt"></i> ' + year + '</span>
-            <span><i class="far fa-clock"></i> ' + runtime + '</span>
-            <span><i class="fas fa-' + (type === 'tv' ? 'tv' : 'film') + '"></i> ' + (type === 'tv' ? 'TV Show' : 'Movie') + '</span>
-          </div>
-          <div class="cs-genres">' + genres + '</div>
-          <p class="cs-modal-overview">' + esc(details.overview || 'No overview available.') + '</p>
-          <div class="cs-modal-actions">
-            ' + (trailerKey ?
-              '<a href="https://www.youtube.com/watch?v=' + trailerKey + '" target="_blank" class="cs-btn cs-btn-primary"><i class="fas fa-play"></i> Watch Trailer</a>' :
-              '<button class="cs-btn cs-btn-primary" disabled style="opacity:0.55;cursor:not-allowed"><i class="fas fa-play"></i> Trailer Unavailable</button>') + '
-            <button class="cs-btn cs-btn-secondary" onclick="csCloseModal()"><i class="fas fa-times"></i> Close</button>
-          </div>';
-      }
-
-      function csCloseModal() {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      function esc(str) {
-        if (!str) return '';
-        const d = document.createElement('div');
-        d.textContent = str;
-        return d.innerHTML;
-      }
-
-      // Events
-      window.addEventListener('scroll', function() {
-        header.classList.toggle('scrolled', window.scrollY > 40);
-        if (isLoading || currentPage >= totalPages) return;
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 600) {
-          currentPage++;
-          loadContent(false);
-        }
-      });
-
-      document.querySelectorAll('.cs-nav-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          csSwitchType(btn.getAttribute('data-type'));
-        });
-      });
-      document.querySelectorAll('#csTypeToggle button').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          csSwitchType(btn.getAttribute('data-type'));
-        });
-      });
-
-      let searchTimer;
-      searchInput.addEventListener('input', function() {
-        clearTimeout(searchTimer);
-        const q = searchInput.value.trim();
-        if (q.length === 0) {
-          isSearch = false;
-          updateTitle();
-          renderPills();
-          loadContent(true);
-          return;
-        }
-        if (q.length < 2) return;
-        searchTimer = setTimeout(function() {
-          isSearch = true;
-          searchQuery = q;
-          currentPage = 1;
-          updateTitle();
-          pills.innerHTML = '';
-          loadContent(true);
-        }, 450);
-      });
-
-      searchInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-          clearTimeout(searchTimer);
-          const q = searchInput.value.trim();
-          if (q.length >= 2) {
-            isSearch = true;
-            searchQuery = q;
-            currentPage = 1;
-            updateTitle();
-            pills.innerHTML = '';
-            loadContent(true);
-          }
-        }
-      });
-
-      modalClose.onclick = csCloseModal;
-      modalOverlay.onclick = function(e) {
-        if (e.target === modalOverlay) csCloseModal();
-      };
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') csCloseModal();
-      });
-
-      // Init
-      document.addEventListener('DOMContentLoaded', function() {
-        renderPills();
-        updateTitle();
-        loadHero();
-        loadContent(true);
-      });
-      //]]>
-    </script>
-  </body>
-</html>
+  <script src="app.js"></script>
+</body>
+  </html>
